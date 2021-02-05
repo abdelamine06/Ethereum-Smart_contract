@@ -1,0 +1,23 @@
+{
+    "name": "Ethereum-Smart_contract",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "test": "jest --watchAll"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/abdelamine06/Ethereum-Smart_contract.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/abdelamine06/Ethereum-Smart_contract/issues"
+    },
+    "homepage": "https://github.com/abdelamine06/Ethereum-Smart_contract#readme",
+    "devDependencies": {
+        "jest": "^26.6.3"
+    }
+}
