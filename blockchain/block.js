@@ -12,8 +12,7 @@ class Block {
     }
 
     static calculateBlockTargetHash({ lastBlock }) {
-        // const value = (MAX_HASH_VALUE / lastBlock.blockHeader.difficulty).toString(16);
-        const value = (MAX_HASH_VALUE / 5).toString(16);
+        const value = (MAX_HASH_VALUE / lastBlock.blockHeader.difficulty).toString(16);
 
         if (value.length > HASH_LENGTH) {
             return 'f'.repeat(HASH_LENGTH);
@@ -26,6 +25,7 @@ class Block {
     static mineBlock({ lastBlock, beneficiary }) {
         const target = Block.calculateBlockTargetHash({ lastBlock });
         let timestamp, truncatedBlockHeader, header, nonce, underTargetHash;
+
         do {
             timestamp = Date.now();
             truncatedBlockHeader = {
@@ -37,12 +37,10 @@ class Block {
             };
             header = keccakHash(truncatedBlockHeader);
             nonce = Math.floor(Math.random() * MAX_NONCE_VALUE);
-
             underTargetHash = keccakHash(header, nonce);
         } while (underTargetHash > target)
 
-        console.log('underTargentHash', underTargetHash)
-        console.log('TargentHash', target)
+
         return new this({
             blockHeader: {
                 ...truncatedBlockHeader,
@@ -63,9 +61,3 @@ class Block {
 
 
 module.exports = Block;
-
-const block = Block.mineBlock({
-    lastBlock: Block.genesis(),
-    beneficiary: 'foo'
-});
-console.log('block', block);
