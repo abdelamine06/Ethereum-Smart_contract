@@ -1,4 +1,5 @@
 const keccak256 = require('js-sha3').keccak256;
+
 const sortCharacters = data => {
     return JSON.stringify(data).split('').sort().join('')
 }
