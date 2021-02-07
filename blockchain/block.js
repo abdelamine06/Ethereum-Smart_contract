@@ -71,26 +71,24 @@ class Block {
 
     static validateBlock({ lastBlock, block }) {
         return new Promise((resolve, reject) => {
-
-            if (keccakHash(block) === keccakHash(block.genesis())) {
+            if (keccakHash(block) === keccakHash(Block.genesis())) {
                 return resolve();
             }
 
             if (keccakHash(lastBlock.blockHeader) !== block.blockHeader.parentHash) {
-
-                return reject(new Error("The parent hash must be a hash of the last blcok's headers"));
+                return reject(
+                    new Error("The parent hash must be a hash of the last block's headers")
+                );
             }
-
 
             if (block.blockHeader.number !== lastBlock.blockHeader.number + 1) {
-
-                return reject(new Error("The block must increment the number by 1"));
+                return reject(new Error('The block must increment the number by 1'));
             }
 
-
-            if (Math.abs(lastBlock.blockHeader.difficulty - block.blockHeader.difficulty) > 1) {
-
-                return reject(new Error("The difficulty must only adjust by 1"));
+            if (
+                Math.abs(lastBlock.blockHeader.difficulty - block.blockHeader.difficulty) > 1
+            ) {
+                return reject(new Error('The difficulty must only adjust by 1'));
             }
 
             const target = Block.calculateBlockTargetHash({ lastBlock });
@@ -99,14 +97,15 @@ class Block {
             const truncatedBlockHeader = {...blockHeader };
             delete truncatedBlockHeader.nonce;
             const header = keccakHash(truncatedBlockHeader);
-            const underTargetHash = keccakHash(header + nonce)
+            const underTargetHash = keccakHash(header + nonce);
 
             if (underTargetHash > target) {
-                return reject(new Error(" The block does not meet the proof of work requirement"))
+                return reject(new Error(
+                    'The block does not meet the proof of work requirement'
+                ));
             }
 
-            return resolve()
-
+            return resolve();
         });
     }
 }
