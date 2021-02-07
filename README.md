@@ -1,6 +1,6 @@
 # Ethereum-Smart_contract
 
-#### Decentralized Computer.
+### Decentralized Computer.
 A decentralized computer is like a normal computer. A normal computer executes a program using one machine.
 
 But a decentralized computer executes a program using multiple machines. Every machine needs to agree upon the output of the program for its results to become official.
