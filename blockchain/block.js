@@ -71,6 +71,7 @@ class Block {
 
     static validateBlock({ lastBlock, block }) {
         return new Promise((resolve, reject) => {
+
             if (keccakHash(block) === keccakHash(block.genesis())) {
                 return resolve();
             }
