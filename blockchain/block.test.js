@@ -1,5 +1,5 @@
 const Block = require('./block');
-const { keccakHash } = require('./utils');
+const { keccakHash } = require('../utils');
 
 describe('Block', () => {
     describe('calculateBlockTargetHash()', () => {
