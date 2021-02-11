@@ -1,5 +1,5 @@
 const { GENESIS_DATA, MINE_RATE } = require('../config')
-const { keccakHash } = require('./utils/index')
+const { keccakHash } = require('../utils/index')
 
 const HASH_LENGTH = 64;
 const MAX_HASH_VALUE = parseInt('f'.repeat(HASH_LENGTH), 16);
