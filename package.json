@@ -27,6 +27,7 @@
     "dependencies": {
         "express": "^4.17.1",
         "js-sha3": "^0.8.0",
-        "pubnub": "^4.29.11"
+        "pubnub": "^4.29.11",
+        "request": "^2.88.2"
     }
 }
