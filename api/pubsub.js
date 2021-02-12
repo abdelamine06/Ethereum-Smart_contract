@@ -11,9 +11,10 @@ const CHANNEL_MAP = {
 }
 
 class PubSub {
-    constructor() {
+    constructor({ blockchain }) {
         this.pubnub = new PubNub(credential)
         this.subscribeToChannels();
+        this.blockchain = blockchain;
         this.listen()
     }
 
@@ -29,18 +30,31 @@ class PubSub {
     listen() {
         this.pubnub.addListener({
             message: messageObject => {
-                console.log('messageObject', messageObject)
+                const { channel, message } = messageObject;
+                const paresedMessage = JSON.parse(message);
+
+                console.log('Message received. Channel :', channel);
+
+                switch (channel) {
+                    case CHANNEL_MAP.BLOCK:
+                        console.log('block message', message);
+                        this.blockchain.addBlock({ block: paresedMessage })
+                            .then(() => console.log('New Block accepted'))
+                            .catch(error => console.error('New Block rejected: ', error.message))
+                        break;
+                    default:
+                        return;
+                }
             }
+        });
+    }
+
+    broadcastBlock(block) {
+        this.publish({
+            channel: CHANNEL_MAP.BLOCK,
+            message: JSON.stringify(block)
         });
     }
 }
 
 module.exports = PubSub
-
-const pubsub = new PubSub();
-setTimeout(() => {
-    pubsub.publish({
-        channel: CHANNEL_MAP.TEST,
-        message: 'foo'
-    })
-}, 3000);

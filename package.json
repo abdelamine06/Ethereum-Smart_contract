@@ -4,6 +4,7 @@
     "description": "",
     "main": "main.js",
     "scripts": {
+        "dev-peer": "nodemon ./api --peer",
         "dev": "nodemon ./api",
         "start": "node ./api",
         "test": "jest --watchAll"
